@@ -15,7 +15,7 @@ export default function NavBar(props) {
   }
 
   return (
-    <nav className="flex flex-row items-center justify-between h-10 m-1 mx-4 bg-white">
+    <nav className="flex flex-row items-center justify-between h-10 p-1 px-4 bg-white shadow">
       <Link to="/">Roskilde Dyreklinik</Link>
 
       {
