@@ -13,10 +13,10 @@ import { useDocumentData } from "react-firebase-hooks/firestore"
 export default function HomePage() {
   //TODO: Get list of pets for this user
   // For now, assume this data comes from the database
-  const pets = [
+  const pets = [  
     {name: "Søren Snegl", status: "healthy"}
   ]
-
+  
   return (
     <div className="flex flex-col flex-1">
       <NavBar />

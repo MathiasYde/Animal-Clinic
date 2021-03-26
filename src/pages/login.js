@@ -43,12 +43,12 @@ export default function LoginPage() {
           pets: [],
           name: name
         })
-        .then((_) => {
-          window.location.href = "/home";
-        })
-        .catch((error) => {
-          swal(error.code, error.message, "error");
-        });
+          .then((_) => {
+            window.location.href = "/home";
+          })
+          .catch((error) => {
+            swal(error.code, error.message, "error");
+          });
       })
       .catch((error) => {
         swal(humanizeerror(error.code), error.message, "error");
@@ -58,22 +58,23 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col flex-1">
       <NavBar />
-      <section className="flex flex-col flex-1 w-64 mx-auto">
-        <form className="flex flex-col p-4 rounded gap-y-2">
+      <section className="flex flex-col justify-center flex-1 w-64 mx-auto">
+        <form className="flex flex-col p-4 rounded shadow gap-y-2">
           <label for="email">Email</label>
           <input id="email-field" type="text" name="email" placeholder="email" />
           <label for="password">Password</label>
           <input id="password-field" type="password" name="password" placeholder="password" />
+
+          <div className="w-full h-px bg-gray-200"></div>
           <p>Fill these in if you're signing up</p>
           <label for="name">Name</label>
           <input id="name-field" type="text" name="name" placeholder="name" />
         </form>
         <div className="flex flex-row p-2 justify-evenly">
-          <button className="px-4 py-2 rounded bg-gray-50" onClick={login}>Sign in</button>
-          <button className="px-4 py-2 rounded bg-gray-50" onClick={signup}>Sign up</button>
-        </div>
+            <button className="px-4 py-2 rounded bg-gray-50" onClick={login}>Sign in</button>
+            <button className="px-4 py-2 rounded bg-gray-50" onClick={signup}>Sign up</button>
+          </div>
       </section>
-
     </div>
   );
 }
