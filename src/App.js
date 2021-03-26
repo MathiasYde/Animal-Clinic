@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createContext } from "react"
 
 import {
   BrowserRouter as Router,
@@ -16,6 +16,10 @@ import "firebase/firestore";
 import "firebase/auth";
 
 import { useAuthState } from "react-firebase-hooks/auth"
+import { useDocumentData } from "react-firebase-hooks/firestore"
+import UserContext from "./datamodels/usercontext";
+
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyD-jJXyFU7U-ZdiVfL0A_Cb7JSp3Lsoesg",
@@ -31,18 +35,28 @@ const firestore = firebase.firestore();
 
 export default function App() {
   const [user] = useAuthState(auth);
+  const [account] = useDocumentData(firestore.collection("accounts").doc(user?.uid));
 
-  return (<Router>
-    <Switch>
-      <Route path="/home">
-        <HomePage />
-      </Route>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-      <Route path="/">
-        <LandingPage />
-      </Route>
-    </Switch>
-  </Router>)
+  const context = {
+    user: user,
+    account: account
+  }
+
+  return (
+    <UserContext.Provider value={context}>
+      <Router>
+        <Switch>
+          <Route path="/home">
+            {account && <HomePage/>}
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/">
+            <LandingPage />
+          </Route>
+        </Switch>
+      </Router>
+    </UserContext.Provider>
+  );
 }
