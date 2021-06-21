@@ -18,8 +18,7 @@ import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useDocumentData } from "react-firebase-hooks/firestore"
 import UserContext from "./datamodels/usercontext";
-
-
+import AddPetPage from "./pages/addpetpage";
 
 firebase.initializeApp({
   apiKey: "AIzaSyD-jJXyFU7U-ZdiVfL0A_Cb7JSp3Lsoesg",
@@ -47,7 +46,8 @@ export default function App() {
       <Router>
         <Switch>
           <Route path="/home">
-            {account && <HomePage/>}
+            {account && account.pets.length > 0 && <HomePage/>}
+            {account && account.pets.length == 0 && <AddPetPage/>}
           </Route>
           <Route path="/login">
             <LoginPage />
